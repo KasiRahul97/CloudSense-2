@@ -1,0 +1,20 @@
+{
+  "architecture": "CEEMDAN+CNN-BiLSTM",
+  "look_back": 48,
+  "horizon": 48,
+  "horizon_label": "4h",
+  "n_components": 8,
+  "hidden": 32,
+  "conv_filters": 16,
+  "trials": 20,
+  "seed": 42,
+  "decomposition": "CEEMDAN",
+  "causal_windowed_decomposition": true,
+  "normalization": "revin_window_meanstd",
+  "eps_scaled": 0.01,
+  "input_unit": "cpu_utilisation_percent",
+  "input_range": [
+    0.0,
+    100.0
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "dataset": "numenta_nab_ec2_cpu",
+  "model": "CEEMDAN+CNN-BiLSTM (Proposed)",
+  "horizon": 48,
+  "horizon_label": "4h",
+  "metrics": {
+    "MAE": 5.7151,
+    "RMSE": 16.7501,
+    "MAPE": 7.4849,
+    "R2": 0.7301
+  },
+  "unit": "cpu_utilisation_percent",
+  "decomposition": "CEEMDAN",
+  "note": "Held-out test-set scores. Reproduce with src/main.py (seed=42)."
+}
