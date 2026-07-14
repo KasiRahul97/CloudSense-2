@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudSense | Live Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="app-container">
+        <!-- Approval Modal (Hidden by default) -->
+        <div id="approvalModal" class="modal-overlay">
+            <div class="modal-card glass-panel">
+                <h3 id="modalTitle">⚠️ Action Required</h3>
+                <p id="modalMessage">Placeholder text</p>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" id="btnReject">Reject</button>
+                    <button class="btn btn-primary" id="btnApprove">Approve Action</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="brand">
+                <div class="logo-circle">CS</div>
+                <h1>CloudSense V2</h1>
+            </div>
+            
+            <div class="control-panel">
+                <h3>CONTROLS</h3>
+                <div class="form-group">
+                    <label>Warning Threshold (%)</label>
+                    <input type="number" id="thresholdInput" value="70">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label>Next CPU Load input</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="number" id="manualCpuInput" placeholder="Auto-sim if empty" min="0" max="100" style="flex: 1; min-width: 0; padding: 10px;">
+                        <button class="btn btn-primary btn-small" id="btnPredictOnce" style="flex: 0 0 auto; width: auto;">Send / Sim</button>
+                    </div>
+                </div>
+                <div class="toggle-container">
+                    <span>Auto Simulator</span>
+                    <label class="switch">
+                        <input type="checkbox" id="toggleAutoSim">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="metrics-panel">
+                <h3>INFERENCE API &amp; TEST METRICS</h3>
+                <div id="healthStatus" class="status-indicator">● Connecting...</div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <span class="metric-label">MAE</span>
+                        <span class="metric-value" id="valMAE">--</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">RMSE</span>
+                        <span class="metric-value" id="valRMSE">--</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">R²</span>
+                        <span class="metric-value" id="valR2">--</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">Lookback</span>
+                        <span class="metric-value" id="valLookback">--</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top stats -->
+            <header class="top-stats">
+                <div class="stat-card glass-panel highlight-card">
+                    <h4>Current CPU Load</h4>
+                    <div class="big-value" id="currentCpuVal">--%</div>
+                </div>
+                <div class="stat-card glass-panel predictive-card">
+                    <h4>Predicted CPU Load</h4>
+                    <div class="big-value glow-text" id="predictedCpuVal">--%</div>
+                </div>
+                <div class="stat-card glass-panel action-card" id="recommendationCard">
+                    <h4>Auto-Scaling Action</h4>
+                    <div class="big-value" id="recommendationVal">WAITING</div>
+                </div>
+            </header>
+
+            <!-- Chart -->
+            <section class="chart-section glass-panel">
+                <div class="chart-header">
+                    <h2>Live Resource Predictions [CEEMDAN+CNN-BiLSTM]</h2>
+                    <span class="badge" id="modelBadge">Model: Unknown</span>
+                </div>
+                <div class="canvas-container">
+                    <canvas id="cpuChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Simulated Fleet Section (local demo, not real AWS) -->
+            <section class="fleet-section glass-panel">
+                <div class="fleet-header">
+                    <h3>Simulated Auto-Scaling Fleet <span style="opacity:.6;font-weight:400">(local demo &mdash; not real AWS)</span></h3>
+                    <span class="badge" id="fleetCountBadge">Instances: 1</span>
+                </div>
+                <div class="fleet-list" id="fleetList">
+                    <!-- Instances injected via JS -->
+                </div>
+            </section>
+
+            <!-- Console -->
+            <section class="console-section glass-panel">
+                <div class="console-header">
+                    <h3>SYSTEM LOGS</h3>
+                    <button class="btn btn-secondary btn-small" onclick="clearLogs()">Clear</button>
+                </div>
+                <div class="console-window" id="consoleWindow">
+                    <!-- Logs go here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
