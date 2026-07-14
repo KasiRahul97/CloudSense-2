@@ -1,0 +1,22 @@
+# CloudSense -- training + benchmark dependencies (CPU-only, reproducible).
+#
+# Install:  pip install -r requirements.txt
+#
+# IMPORTANT (Windows): torch is PINNED to 2.4.1. torch 2.12.0 wheels on Windows
+# fail to load c10.dll with "OSError: [WinError 1114] A dynamic link library
+# (DLL) initialization routine failed" even in a clean environment. 2.4.1+cpu is
+# the last version verified working here. On Windows the default PyPI torch wheel
+# is already CPU-only, so no extra index URL is needed.
+torch==2.4.1
+
+# Real CEEMDAN decomposition (this package imports as `PyEMD`).
+EMD-signal==1.9.0
+
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.4.2
+matplotlib==3.9.2
+requests==2.32.3
+
+# Tests
+pytest==8.3.2

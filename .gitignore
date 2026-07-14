@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.env
+scratch/
+~$*.docx
+
+# Run logs and regenerable artifacts
+*.log
+data/.decomp_cache/
+.pytest_cache/
+
+# Editor / IDE
+.vscode/
+.idea/
+.claude/

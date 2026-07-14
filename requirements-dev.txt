@@ -1,0 +1,4 @@
+# Dev/CI dependencies: training + inference + test client.
+-r requirements.txt
+-r deploy/inference/requirements.txt
+httpx==0.27.0
