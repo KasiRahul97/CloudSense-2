@@ -1,0 +1,13 @@
+# CloudSense inference server deps. torch pinned to 2.4.1 to match training
+# (and because torch 2.12 wheels fail to load on some platforms -- see the
+# top-level requirements.txt note). The API imports the project's src/ modules,
+# which pull in pandas + scikit-learn + EMD-signal (real causal CEEMDAN).
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+torch==2.4.1
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.4.2
+EMD-signal==1.9.0
+pydantic==2.7.1
+python-multipart==0.0.9
